@@ -1,134 +1,520 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mantra: Product Feedback & Rating Decision Tool</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>मन्त्र | Mantra</title>
+
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
---bg:#faf6ee;--card:#fff;--ink:#2b2118;--mute:#6f6254;--line:#e3d8c4;--acc:#9a4a12;--accbg:#f6e7d3;--good:#2f7d3c;--warn:#b0541a}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1713;--card:#262019;--ink:#f2e9da;--mute:#b4a48d;--line:#3a3025;--acc:#f0a25e;--accbg:#3a2a1a;--good:#7bd08a;--warn:#f0a25e}}
-:root[data-theme="dark"]{--bg:#1b1713;--card:#262019;--ink:#f2e9da;--mute:#b4a48d;--line:#3a3025;--acc:#f0a25e;--accbg:#3a2a1a;--good:#7bd08a;--warn:#f0a25e}
-html{scroll-padding-top:env(safe-area-inset-top,0px);color-scheme:light dark}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
-main{max-width:920px;margin:0 auto;padding:20px 16px 48px}
-h1{font-size:1.9rem;margin:.2em 0}h2{font-size:1.3rem;margin:1.6em 0 .5em;color:var(--acc)}
-.sub{color:var(--mute);margin:0 0 1rem}
-.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
-.step b{color:var(--acc)}
-label{display:block;font-size:.9rem;color:var(--mute);margin:8px 0 3px}
-input,select,textarea,button{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;width:100%}
-input[type=range]{padding:0}
-button{background:var(--acc);color:var(--bg);border:0;cursor:pointer;font-weight:bold;margin-top:12px}
-.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.rank{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
-.no{font-size:1.6rem;font-weight:bold;color:var(--acc);min-width:2ch}
-.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0}
-.bar i{display:block;height:100%;background:var(--acc)}
-.tag{display:inline-block;font-size:.78rem;padding:2px 8px;border-radius:99px;background:var(--accbg);color:var(--acc);margin-right:6px}
-.good{color:var(--good)}.warn{color:var(--warn)}
-.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:480px}
-th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;font-size:.93rem}th{background:var(--accbg)}
-small{color:var(--mute)}.hide{display:none}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #17130f;
+    color: #f5e8d5;
+    line-height: 1.6;
+}
+
+header {
+    background: #332216;
+    padding: 25px 15px;
+    text-align: center;
+    border-bottom: 2px solid #e5a052;
+}
+
+header h1 {
+    color: #ffb66d;
+    font-size: 38px;
+    margin: 0;
+}
+
+header p {
+    color: #e8d5bd;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+h2 {
+    color: #ffb66d;
+    border-bottom: 1px solid #65452c;
+    padding-bottom: 8px;
+    margin-top: 30px;
+}
+
+h3 {
+    color: #ffb66d;
+}
+
+.card {
+    background: #261e17;
+    padding: 18px;
+    margin: 14px 0;
+    border: 1px solid #59402b;
+    border-radius: 12px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 7px 0 15px;
+    background: #17130f;
+    color: white;
+    border: 1px solid #765537;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+label {
+    color: #f0d6b7;
+}
+
+button {
+    background: #f3a65d;
+    color: #24160c;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ffc17f;
+}
+
+.product {
+    background: #261e17;
+    border: 1px solid #65452c;
+    border-radius: 12px;
+    padding: 17px;
+    margin: 12px 0;
+}
+
+.score {
+    color: #8fe0a0;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ffbd69;
+}
+
+.badge {
+    color: #8fe0a0;
+    font-weight: bold;
+}
+
+.small {
+    color: #c8b7a3;
+    font-size: 14px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #c8b7a3;
+}
+
+@media (min-width: 700px) {
+    .product-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+}
 </style>
 </head>
+
 <body>
-<main>
-<h1>📜 Mantra</h1>
-<p class="sub">A product feedback &amp; rating decision tool inspired by Kautilya’s Arthashastra</p>
 
-<div class="grid">
-<div class="card step"><b>1. Gudhapurusha</b><br>Gather information: customers give ratings and feedback on products.</div>
-<div class="card step"><b>2. Mantra</b><br>Consultation: you set how much each factor matters to you.</div>
-<div class="card step"><b>3. Nirnaya</b><br>Decision: products are ranked and the best option is recommended.</div>
+<header>
+    <h1>मन्त्र — Mantra</h1>
+    <p>Product Feedback & Rating Decision System</p>
+    <p>Inspired by Kautilya's Arthashastra</p>
+</header>
+
+<div class="container">
+
+    <section class="card">
+        <h2>गूढपुरुष — Information Gathering</h2>
+        <p>
+            This website collects product ratings, descriptions, and
+            customer feedback to help users compare different products.
+        </p>
+
+        <h2>मन्त्र — Consultation and Planning</h2>
+        <p>
+            Users can choose the importance of Quality, Value for Money,
+            and Service according to their preferences.
+        </p>
+
+        <h2>निर्णय — Decision-Making</h2>
+        <p>
+            The system calculates product scores, ranks products,
+            and recommends the highest-scoring product.
+        </p>
+    </section>
+
+    <h2>प्राथमिकताएँ — Your Priorities</h2>
+
+    <div class="card">
+        <label>
+            Quality Importance:
+            <span id="qValue">3</span>
+        </label>
+        <input type="range" id="qWeight" min="1" max="5" value="3">
+
+        <label>
+            Value for Money Importance:
+            <span id="vValue">3</span>
+        </label>
+        <input type="range" id="vWeight" min="1" max="5" value="3">
+
+        <label>
+            Service Importance:
+            <span id="sValue">3</span>
+        </label>
+        <input type="range" id="sWeight" min="1" max="5" value="3">
+
+        <p class="small">
+            Adjust the sliders to change the importance of each factor.
+        </p>
+    </div>
+
+    <h2>उत्पाद विवरण — Product Details</h2>
+
+    <div class="card">
+        <label for="productName">Select Product</label>
+        <select id="productName">
+            <option>Wireless Earbuds</option>
+            <option>Bluetooth Neckband</option>
+            <option>Wireless Headphones</option>
+            <option>Smartphone</option>
+            <option>Bluetooth Speaker</option>
+        </select>
+
+        <label for="description">Product Description</label>
+        <textarea id="description"
+            placeholder="Write the product description in English..."></textarea>
+    </div>
+
+    <h2>मूल्यांकन — Product Rating</h2>
+
+    <div class="card">
+        <label for="quality">Quality Rating (1–5)</label>
+        <select id="quality">
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Fair</option>
+            <option value="3" selected>3 - Good</option>
+            <option value="4">4 - Very Good</option>
+            <option value="5">5 - Excellent</option>
+        </select>
+
+        <label for="value">Value for Money Rating (1–5)</label>
+        <select id="value">
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Fair</option>
+            <option value="3" selected>3 - Good</option>
+            <option value="4">4 - Very Good</option>
+            <option value="5">5 - Excellent</option>
+        </select>
+
+        <label for="service">Service Rating (1–5)</label>
+        <select id="service">
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Fair</option>
+            <option value="3" selected>3 - Good</option>
+            <option value="4">4 - Very Good</option>
+            <option value="5">5 - Excellent</option>
+        </select>
+
+        <h2>प्रतिक्रिया — Product Feedback</h2>
+
+        <label for="feedback">Write Feedback</label>
+        <textarea id="feedback"
+            placeholder="Write your product experience in English..."></textarea>
+
+        <button type="button" onclick="submitFeedback()">
+            Submit Rating & Feedback
+        </button>
+
+        <p class="small">
+            No customer name is required.
+        </p>
+    </div>
+
+    <h2>क्रम निर्धारण — Product Ranking</h2>
+
+    <div id="ranking" class="product-grid"></div>
+
+    <h2>प्रतिक्रिया विवरण — Feedback Records</h2>
+
+    <div id="feedbackRecords" class="card">
+        No feedback submitted yet.
+    </div>
+
+    <h2>व्यवसाय मॉडल — Business Model</h2>
+
+    <div class="card">
+        <h3>Customers</h3>
+        <p>
+            Shoppers who want to compare products and sellers who want
+            to understand customer feedback.
+        </p>
+
+        <h3>Value Proposition</h3>
+        <p>
+            Product comparisons based on quality, value for money,
+            service, and customer feedback.
+        </p>
+
+        <h3>Revenue Model</h3>
+        <p>
+            A possible future revenue model includes premium seller
+            analytics and product comparison reports.
+        </p>
+
+        <h3>Costs</h3>
+        <p>
+            Possible costs include website hosting, maintenance,
+            development, and feedback moderation.
+        </p>
+    </div>
+
+    <h2>अर्थशास्त्र संबंध — Connection with Arthashastra</h2>
+
+    <div class="card">
+        <p>
+            Mantra connects selected ideas associated with Kautilya's
+            Arthashastra to a modern product comparison system.
+            Information gathering is represented by product feedback,
+            consultation by user priorities, and decision-making by
+            product ranking and risk warnings.
+        </p>
+        <p class="small">
+            This is a conceptual connection, not a claim that the
+            Arthashastra described a modern digital rating system.
+        </p>
+    </div>
+
 </div>
 
-<h2>1. Your priorities (weights)</h2>
-<div class="card"><div class="row3">
-<div><label>Quality: <span id="wqv">3</span></label><input type="range" id="wq" min="1" max="5" value="3"></div>
-<div><label>Value for money: <span id="wvv">3</span></label><input type="range" id="wv" min="1" max="5" value="3"></div>
-<div><label>Service: <span id="wsv">3</span></label><input type="range" id="ws" min="1" max="5" value="3"></div>
-</div></div>
+<footer>
+    Mantra — Product Feedback & Rating Prototype
+</footer>
 
-<h2>2. Give feedback</h2>
-<div class="card">
-<label for="prod">Product</label><select id="prod"></select>
-<input id="newp" class="hide" placeholder="New product name" maxlength="40">
-<div class="row3">
-<div><label>Quality (1–5)</label><select id="rq"></select></div>
-<div><label>Value (1–5)</label><select id="rv"></select></div>
-<div><label>Service (1–5)</label><select id="rs"></select></div>
-</div>
-<label for="cm">Comment</label><textarea id="cm" rows="2" maxlength="140" placeholder="Short feedback"></textarea>
-<button id="add" type="button">Submit feedback</button>
-</div>
-
-<h2>3. Ranking and recommendation</h2>
-<div id="out"></div>
-<small>Demo data is stored only in this browser. <a href="#" id="reset">Reset demo data</a></small>
-
-<h2>Business model</h2>
-<div class="scroll"><table>
-<tr><th>Customers</th><td>Shoppers who want honest reviews; small sellers who want customer feedback.</td></tr>
-<tr><th>Value</th><td>One ranked score from ratings, personalised by the user’s own priorities, instead of a single star average.</td></tr>
-<tr><th>Revenue</th><td>Free for shoppers. Sellers pay for feedback analytics and verified-review badges; premium comparison reports.</td></tr>
-<tr><th>Cost</th><td>Hosting, moderation of fake reviews, development.</td></tr>
-</table></div>
-
-<h2>Arthashastra connection</h2>
-<div class="scroll"><table>
-<tr><th>Arthashastra idea</th><th>In this website</th></tr>
-<tr><td>Information from many sources</td><td>Ratings and comments from many customers</td></tr>
-<tr><td>Consultation before action</td><td>Weights chosen by the user</td></tr>
-<tr><td>Examine alternatives, resources, risks</td><td>Ranking of options; warning when feedback is too little</td></tr>
-<tr><td>Decision, implementation and monitoring</td><td>Recommendation, and scores that update with new feedback</td></tr>
-</table></div>
-<p><small>This is a conceptual comparison. The Arthashastra was not a computer system; the link is the logical organisation of information, alternatives and risks.</small></p>
-</main>
 <script>
-var KEY='mantra_v1';
-function seed(){return {products:[
-{name:'Wireless Earbuds A',r:[[5,3,4,'Great sound'],[4,3,4,'Good battery'],[5,2,3,'Pricey'],[4,3,4,'Comfortable']]},
-{name:'Wireless Earbuds B',r:[[3,5,3,'Cheap and decent'],[3,5,2,'Okay for the price'],[4,5,3,'Value pick']]},
-{name:'Wireless Earbuds C',r:[[5,4,5,'Fast support']]}]}}
-var data=null;
-try{data=JSON.parse(localStorage.getItem(KEY))}catch(e){}
-if(!data||!data.products)data=seed();
-function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
-function $(i){return document.getElementById(i)}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-['rq','rv','rs'].forEach(function(id){var h='';for(var i=5;i>=1;i--)h+='<option>'+i+'</option>';$(id).innerHTML=h});
-function fillProducts(){var h='';data.products.forEach(function(p,i){h+='<option value="'+i+'">'+esc(p.name)+'</option>'});
-h+='<option value="new">+ New product</option>';$('prod').innerHTML=h}
-$('prod').onchange=function(){$('newp').className=this.value==='new'?'':'hide'};
-['wq','wv','ws'].forEach(function(id){$(id).oninput=function(){$(id+'v').textContent=this.value;render()}});
-function render(){
- var w=[+$('wq').value,+$('wv').value,+$('ws').value],tw=w[0]+w[1]+w[2];
- var list=data.products.map(function(p){var n=p.r.length,a=[0,0,0];
-  p.r.forEach(function(x){for(var k=0;k<3;k++)a[k]+=x[k]});
-  a=a.map(function(v){return n?v/n:0});
-  return {p:p,n:n,a:a,s:(a[0]*w[0]+a[1]*w[1]+a[2]*w[2])/tw}});
- list.sort(function(x,y){return y.s-x.s});
- var h='';
- list.forEach(function(o,i){
-  var last=o.p.r.length?o.p.r[o.p.r.length-1][3]:'';
-  h+='<div class="card rank"><div class="no">'+(i+1)+'</div><div style="flex:1"><b>'+esc(o.p.name)+'</b> '+
-  (i===0?'<span class="tag good">Recommended</span>':'')+
-  '<div class="bar"><i style="width:'+(o.s/5*100).toFixed(0)+'%"></i></div>'+
-  'Score <b>'+o.s.toFixed(2)+'</b> / 5 &middot; '+o.n+' feedback(s)<br><small>Quality '+o.a[0].toFixed(1)+' &middot; Value '+o.a[1].toFixed(1)+' &middot; Service '+o.a[2].toFixed(1)+'</small>'+
-  (o.n<3?'<br><span class="warn">Risk: only '+o.n+' feedback(s). Collect more information before deciding.</span>':'')+
-  (last?'<br><small>Latest: “'+esc(last)+'”</small>':'')+'</div></div>'});
- $('out').innerHTML=h}
-$('add').onclick=function(){
- var v=$('prod').value,idx;
- if(v==='new'){var nm=$('newp').value.trim();if(!nm){$('newp').focus();return}
-  data.products.push({name:nm,r:[]});idx=data.products.length-1}else idx=+v;
- data.products[idx].r.push([+$('rq').value,+$('rv').value,+$('rs').value,$('cm').value.trim()]);
- save();$('cm').value='';$('newp').value='';fillProducts();$('prod').value=idx;$('newp').className='hide';render()};
-$('reset').onclick=function(e){e.preventDefault();data=seed();save();fillProducts();render()};
-fillProducts();render();
+const STORAGE_KEY = "mantraFeedbackRecords";
+
+let records = [];
+
+try {
+    records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    if (!Array.isArray(records)) records = [];
+} catch (error) {
+    records = [];
+}
+
+function saveRecords() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    } catch (error) {
+        alert("Browser storage is unavailable. Your data may not persist.");
+    }
+}
+
+function escapeHTML(text) {
+    return String(text).replace(/[&<>"']/g, function (character) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[character];
+    });
+}
+
+function calculateScore(record) {
+    const qWeight = Number(document.getElementById("qWeight").value);
+    const vWeight = Number(document.getElementById("vWeight").value);
+    const sWeight = Number(document.getElementById("sWeight").value);
+
+    const totalWeight = qWeight + vWeight + sWeight;
+
+    return (
+        record.quality * qWeight +
+        record.value * vWeight +
+        record.service * sWeight
+    ) / totalWeight;
+}
+
+function submitFeedback() {
+    const product = document.getElementById("productName").value;
+    const description = document.getElementById("description").value.trim();
+    const feedback = document.getElementById("feedback").value.trim();
+
+    if (!feedback) {
+        alert("Please write product feedback before submitting.");
+        return;
+    }
+
+    const record = {
+        product: product,
+        description: description,
+        quality: Number(document.getElementById("quality").value),
+        value: Number(document.getElementById("value").value),
+        service: Number(document.getElementById("service").value),
+        feedback: feedback,
+        date: new Date().toLocaleDateString()
+    };
+
+    records.push(record);
+    saveRecords();
+
+    document.getElementById("feedback").value = "";
+
+    showRanking();
+    showFeedback();
+
+    alert("Product rating and feedback submitted successfully!");
+}
+
+function showRanking() {
+    const grouped = {};
+
+    records.forEach(function (record) {
+        if (!grouped[record.product]) {
+            grouped[record.product] = {
+                product: record.product,
+                quality: 0,
+                value: 0,
+                service: 0,
+                count: 0,
+                description: record.description
+            };
+        }
+
+        const item = grouped[record.product];
+
+        item.quality += record.quality;
+        item.value += record.value;
+        item.service += record.service;
+        item.count++;
+
+        if (record.description) {
+            item.description = record.description;
+        }
+    });
+
+    const products = Object.values(grouped).map(function (item) {
+        const average = {
+            product: item.product,
+            description: item.description,
+            quality: item.quality / item.count,
+            value: item.value / item.count,
+            service: item.service / item.count,
+            count: item.count
+        };
+
+        return {
+            ...average,
+            score: calculateScore(average)
+        };
+    });
+
+    products.sort(function (a, b) {
+        return b.score - a.score;
+    });
+
+    const ranking = document.getElementById("ranking");
+
+    if (products.length === 0) {
+        ranking.innerHTML =
+            '<div class="product card">Submit feedback to see product rankings.</div>';
+        return;
+    }
+
+    ranking.innerHTML = products.map(function (item, index) {
+        const recommendation = index === 0
+            ? '<span class="badge">Recommended</span>'
+            : "";
+
+        const warning = item.count < 3
+            ? '<p class="warning">Risk Warning: Limited feedback. Collect more reviews before deciding.</p>'
+            : "";
+
+        return `
+            <div class="product">
+                <h3>${index + 1}. ${escapeHTML(item.product)}</h3>
+                ${recommendation}
+                <p>${escapeHTML(item.description || "No description provided.")}</p>
+                <p class="score">${item.score.toFixed(2)} / 5</p>
+                <p>Quality: ${item.quality.toFixed(1)} / 5</p>
+                <p>Value: ${item.value.toFixed(1)} / 5</p>
+                <p>Service: ${item.service.toFixed(1)} / 5</p>
+                <p>Feedback entries: ${item.count}</p>
+                ${warning}
+            </div>
+        `;
+    }).join("");
+}
+
+function showFeedback() {
+    const area = document.getElementById("feedbackRecords");
+
+    if (records.length === 0) {
+        area.innerHTML = "No feedback submitted yet.";
+        return;
+    }
+
+    area.innerHTML = records.slice().reverse().map(function (record) {
+        return `
+            <div class="product">
+                <h3>${escapeHTML(record.product)}</h3>
+                <p>${escapeHTML(record.description || "No description provided.")}</p>
+                <p>Quality: ${record.quality}/5 |
+                   Value: ${record.value}/5 |
+                   Service: ${record.service}/5</p>
+                <p>${escapeHTML(record.feedback)}</p>
+                <p class="small">Date: ${escapeHTML(record.date)}</p>
+            </div>
+        `;
+    }).join("");
+}
+
+["qWeight", "vWeight", "sWeight"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", function () {
+        document.getElementById("qValue").textContent =
+            document.getElementById("qWeight").value;
+        document.getElementById("vValue").textContent =
+            document.getElementById("vWeight").value;
+        document.getElementById("sValue").textContent =
+            document.getElementById("sWeight").value;
+
+        showRanking();
+    });
+});
+
+showRanking();
+showFeedback();
 </script>
+
 </body>
 </html>
+```
